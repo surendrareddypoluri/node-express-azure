@@ -7,8 +7,11 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Windows-latest'
+  vmImage: 'ubuntu-latest'
 
+variables:
+  buildConfiguration: 'Release'
+ 
 steps:
 - task: NodeTool@0
   inputs:
@@ -28,6 +31,8 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 
 - task: AzureRmWebAppDeployment@4
