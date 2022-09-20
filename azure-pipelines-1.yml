@@ -20,8 +20,21 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  inputs:
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial (2e181315-7830-43d1-82da-d953c8549daa)'
+    appType: 'webApp'
+    WebAppName: 'infosys12'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
