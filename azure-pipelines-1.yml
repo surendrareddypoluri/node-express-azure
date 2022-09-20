@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Windows latest'
+  vmImage: 'Windows-latest'
 
 steps:
 - task: NodeTool@0
@@ -28,8 +28,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -37,4 +36,4 @@ steps:
     azureSubscription: 'Free Trial (2e181315-7830-43d1-82da-d953c8549daa)'
     appType: 'webApp'
     WebAppName: 'infosys12'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/*.zip'
