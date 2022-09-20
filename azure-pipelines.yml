@@ -1,13 +1,4 @@
 trigger:
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(2e181315-7830-43d1-82da-d953c8549daa)'
-    appType: 'webApp'
-    WebAppName: 'infosys12'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'dotnetrg'
-    SlotName: 'production'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 - master
 
@@ -36,4 +27,13 @@ steps:
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
-  
+ - task: AzureRmWebAppDeployment@4
+   inputs:
+     ConnectionType: 'AzureRM'
+     azureSubscription: 'Free Trial(1)(2e181315-7830-43d1-82da-d953c8549daa)'
+     appType: 'webApp'
+     WebAppName: 'infosys12'
+     deployToSlotOrASE: true
+     ResourceGroupName: 'dotnetrg'
+     SlotName: 'production'
+     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
